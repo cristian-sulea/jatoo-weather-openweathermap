@@ -1,0 +1,81 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+
+  <parent>
+    <groupId>net.sulea.cristian</groupId>
+    <artifactId>jatoo</artifactId>
+    <relativePath>../jatoo/pom.xml</relativePath>
+    <version>4.1.0</version>
+  </parent>
+
+  <artifactId>jatoo-weather-openweathermap</artifactId>
+  <packaging>jar</packaging>
+
+
+  <name>JaToo Weather - OpenWeatherMap</name>
+  <description>OpenWeatherMap implementation for JaToo Weather library.</description>
+  <url>http://cristian.sulea.net/projects/jatoo-weather-openweathermap/</url>
+
+  <inceptionYear>2016</inceptionYear>
+
+
+  <developers>
+    <developer>
+      <id>cristian.sulea</id>
+      <name>Cristian Sulea</name>
+      <email>cristian.sulea.79@gmail.com</email>
+      <url>http://cristian.sulea.net</url>
+    </developer>
+  </developers>
+
+
+  <scm>
+    <connection>scm:git:git@github.com:cristian-sulea/jatoo-weather-openweathermap.git</connection>
+    <developerConnection>scm:git:git@github.com:cristian-sulea/jatoo-weather-openweathermap.git</developerConnection>
+    <url>https://github.com/cristian-sulea/jatoo-weather-openweathermap</url>
+  </scm>
+
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <jersey.version>2.23.2</jersey.version>
+        <jerseybundle.version>1.19.2</jerseybundle.version>
+        <httpcompontents.version>4.5.2</httpcompontents.version>
+        <json.version>20160810</json.version>
+        <jackson.version>2.7.4</jackson.version>
+        <commons.version>2.5</commons.version>
+    </properties>
+    
+  <dependencies>
+
+    <dependency>
+      <artifactId>jatoo-weather</artifactId>
+      <groupId>${project.groupId}</groupId>
+      <version>${project.version}</version>
+    </dependency>
+    
+    
+    
+            <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${httpcompontents.version}</version>
+        </dependency>
+<!--         <dependency> -->
+<!--             <groupId>org.apache.httpcomponents</groupId> -->
+<!--             <artifactId>httpmime</artifactId> -->
+<!--             <version>${httpcompontents.version}</version> -->
+<!--         </dependency> -->
+
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>${json.version}</version>
+        </dependency>
+
+  </dependencies>
+
+
+</project>

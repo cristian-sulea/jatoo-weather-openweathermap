@@ -1,0 +1,37 @@
+{
+  "dt": 1475844760,
+  "coord": {
+    "lon": 26.11,
+    "lat": 44.43
+  },
+  "weather": [{
+    "icon": "04d",
+    "description": "broken clouds",
+    "main": "Clouds",
+    "id": 803
+  }],
+  "name": "Bucharest",
+  "cod": 200,
+  "main": {
+    "temp": 14.41,
+    "temp_min": 14.41,
+    "grnd_level": 1023.89,
+    "humidity": 77,
+    "pressure": 1023.89,
+    "sea_level": 1029.67,
+    "temp_max": 14.41
+  },
+  "clouds": {"all": 56},
+  "id": 683506,
+  "sys": {
+    "country": "RO",
+    "sunrise": 1475814094,
+    "sunset": 1475855037,
+    "message": 0.0089
+  },
+  "base": "stations",
+  "wind": {
+    "deg": 9.50104,
+    "speed": 2.42
+  }
+}
