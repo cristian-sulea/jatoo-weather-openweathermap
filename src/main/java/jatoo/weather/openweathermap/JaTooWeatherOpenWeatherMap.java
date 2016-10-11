@@ -33,6 +33,13 @@ import org.json.JSONObject;
 import jatoo.weather.JaTooWeather;
 import jatoo.weather.JaTooWeatherService;
 
+/**
+ * {@link JaTooWeatherService} implementation for OpenWeatherMap
+ * (https://openweathermap.org).
+ * 
+ * @author <a href="http://cristian.sulea.net" rel="author">Cristian Sulea</a>
+ * @version 1.1, October 11, 2016
+ */
 public class JaTooWeatherOpenWeatherMap extends JaTooWeatherService {
 
   /** the logger */
@@ -40,7 +47,7 @@ public class JaTooWeatherOpenWeatherMap extends JaTooWeatherService {
 
   private static final String URL_BASE = "http://api.openweathermap.org/data/2.5/";
   private static final String PATH_CURRENT = "weather";
-  private static final String PATH_FORECAST = "forecast/daily";
+  // private static final String PATH_FORECAST = "forecast/daily";
 
   private final String appid;
 
@@ -50,23 +57,31 @@ public class JaTooWeatherOpenWeatherMap extends JaTooWeatherService {
   }
 
   public JaTooWeatherOpenWeatherMap(final String appid) {
-    super();
-    this.appid = appid;
+    this(null, appid);
   }
 
   @Override
-  public JaTooWeather getWeather(final String city) throws IOException {
+  protected JaTooWeather getWeatherImpl(String city) throws Throwable {
+    return parseJSON(getResponse(URL_BASE + PATH_CURRENT + "?appid=" + appid + "&id=" + city + "&units=metric"));
+  }
 
-    String url = URL_BASE + PATH_CURRENT + "?appid=" + appid + "&id=" + city + "&units=metric";
+  protected String getResponse(String url) throws IOException {
 
     CloseableHttpClient client = HttpClientBuilder.create().setSSLHostnameVerifier(new NoopHostnameVerifier()).build();
     HttpGet request = new HttpGet(url);
     CloseableHttpResponse response = client.execute(request);
     BufferedHttpEntity entity = new BufferedHttpEntity(response.getEntity());
 
-    JSONObject json = new JSONObject(EntityUtils.toString(entity, "UTF-8"));
+    return EntityUtils.toString(entity, "UTF-8");
+  }
 
-    System.out.println(json.toString(2));
+  protected JaTooWeather parseJSON(final String string) {
+
+    JSONObject json = new JSONObject(string);
+
+    if (logger.isDebugEnabled()) {
+      logger.debug(json.toString(2));
+    }
 
     JSONObject jsonWeather = json.getJSONArray("weather").getJSONObject(0);
     JSONObject jsonMain = json.getJSONObject("main");
@@ -100,25 +115,6 @@ public class JaTooWeatherOpenWeatherMap extends JaTooWeatherService {
     weather.sunset = jsonSys.getLong("sunset") * 1000L;
 
     return weather;
-  }
-
-  public static void main(String[] args) throws Throwable {
-
-    JaTooWeatherService service = new JaTooWeatherOpenWeatherMap("0b438dbe7fb5d24ce8ca273834fc988c");
-    JaTooWeather weather = service.getWeather("683506");
-
-    System.out.println(service.getDescription(weather));
-    System.out.println(service.getTemperatureWithText(weather));
-    System.out.println(service.getHumidityWithText(weather));
-    System.out.println(service.getPressureWithText(weather));
-    System.out.println(service.getWindWithText(weather));
-    System.out.println(service.getWindDirectionWithText(weather));
-    System.out.println(service.getCloudsWithText(weather));
-    System.out.println(service.getRainWithText(weather));
-    System.out.println(service.getSnowWithText(weather));
-    System.out.println(service.getSunriseWithText(weather));
-    System.out.println(service.getSunsetWithText(weather));
-
   }
 
 }
