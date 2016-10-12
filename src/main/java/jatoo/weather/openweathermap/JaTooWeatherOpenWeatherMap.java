@@ -91,6 +91,8 @@ public class JaTooWeatherOpenWeatherMap extends JaTooWeatherService {
 
     JaTooWeather weather = new JaTooWeather();
 
+    weather.city = json.getString("name");
+
     weather.description = jsonWeather.getString("description");
 
     weather.temperature = jsonMain.getDouble("temp");
