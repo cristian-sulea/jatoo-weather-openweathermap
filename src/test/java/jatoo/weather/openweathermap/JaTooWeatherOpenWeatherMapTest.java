@@ -9,7 +9,7 @@ import org.junit.Test;
 import jatoo.weather.JaTooWeather;
 import jatoo.weather.JaTooWeatherService;
 
-public class JaTooWeatherOpenWeatherMapTests {
+public class JaTooWeatherOpenWeatherMapTest {
 
   private static final String APPID = "0b438dbe7fb5d24ce8ca273834fc988c";
   private static final String CITY = "683506";
@@ -19,7 +19,7 @@ public class JaTooWeatherOpenWeatherMapTests {
 
     JaTooWeatherService service = new JaTooWeatherOpenWeatherMap(APPID) {
       protected String getResponse(String url) throws IOException {
-        return IOUtils.toString(JaTooWeatherOpenWeatherMapTests.class.getResource("response1.json"));
+        return IOUtils.toString(JaTooWeatherOpenWeatherMapTest.class.getResource("response1.json"));
       }
     };
 
@@ -43,7 +43,7 @@ public class JaTooWeatherOpenWeatherMapTests {
 
     JaTooWeatherService service = new JaTooWeatherOpenWeatherMap(APPID) {
       protected String getResponse(String url) throws IOException {
-        return IOUtils.toString(JaTooWeatherOpenWeatherMapTests.class.getResource("response2.json"));
+        return IOUtils.toString(JaTooWeatherOpenWeatherMapTest.class.getResource("response2.json"));
       }
     };
 
