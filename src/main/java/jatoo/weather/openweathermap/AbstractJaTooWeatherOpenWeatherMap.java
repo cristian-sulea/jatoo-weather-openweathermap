@@ -48,6 +48,13 @@ public abstract class AbstractJaTooWeatherOpenWeatherMap extends JaTooWeatherSer
     super(language);
   }
 
+  /**
+   * The constructor.
+   */
+  public AbstractJaTooWeatherOpenWeatherMap() {
+    super();
+  }
+
   @Override
   protected final JaTooWeather getWeatherImpl(final String city) throws Throwable {
 
