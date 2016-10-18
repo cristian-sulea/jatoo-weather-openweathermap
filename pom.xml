@@ -14,7 +14,7 @@
 
 
   <name>JaToo Weather - OpenWeatherMap</name>
-  <description>OpenWeatherMap implementation for JaToo Weather library.</description>
+  <description>OpenWeatherMap implementation for the JaToo Weather library.</description>
   <url>http://cristian.sulea.net/projects/jatoo-weather-openweathermap/</url>
 
   <inceptionYear>2016</inceptionYear>

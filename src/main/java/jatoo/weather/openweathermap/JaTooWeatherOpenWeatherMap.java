@@ -19,8 +19,6 @@ package jatoo.weather.openweathermap;
 
 import java.io.IOException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
@@ -28,95 +26,59 @@ import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONObject;
 
-import jatoo.weather.JaTooWeather;
 import jatoo.weather.JaTooWeatherService;
 
 /**
- * {@link JaTooWeatherService} implementation for OpenWeatherMap
+ * Default {@link JaTooWeatherService} implementation for OpenWeatherMap
  * (https://openweathermap.org).
  * 
  * @author <a href="http://cristian.sulea.net" rel="author">Cristian Sulea</a>
- * @version 1.1, October 11, 2016
+ * @version 2.0, October 18, 2016
  */
-public class JaTooWeatherOpenWeatherMap extends JaTooWeatherService {
+public class JaTooWeatherOpenWeatherMap extends AbstractJaTooWeatherOpenWeatherMap {
 
-  /** the logger */
-  private static final Log logger = LogFactory.getLog(JaTooWeatherOpenWeatherMap.class);
+  /** The API call URL for current weather. */
+  private static final String URL_CURRENT_WEATHER = "http://api.openweathermap.org/data/2.5/weather";
 
-  private static final String URL_BASE = "http://api.openweathermap.org/data/2.5/";
-  private static final String PATH_CURRENT = "weather";
+  // /** The API call URL for daily forecast weather. */
   // private static final String PATH_FORECAST = "forecast/daily";
 
+  /** The API key. */
   private final String appid;
 
+  /**
+   * The constructor.
+   * 
+   * @param language
+   *          the language for which texts are desired
+   * @param appid
+   *          the API key
+   */
   public JaTooWeatherOpenWeatherMap(final String language, final String appid) {
     super(language);
     this.appid = appid;
   }
 
+  /**
+   * The constructor.
+   * 
+   * @param appid
+   *          the API key
+   */
   public JaTooWeatherOpenWeatherMap(final String appid) {
     this(null, appid);
   }
 
   @Override
-  protected JaTooWeather getWeatherImpl(String city) throws Throwable {
-    return parseJSON(getResponse(URL_BASE + PATH_CURRENT + "?appid=" + appid + "&id=" + city + "&units=metric"));
-  }
-
-  protected String getResponse(String url) throws IOException {
+  protected final String getJSONResponse(final String city) throws IOException {
 
     CloseableHttpClient client = HttpClientBuilder.create().setSSLHostnameVerifier(new NoopHostnameVerifier()).build();
-    HttpGet request = new HttpGet(url);
+    HttpGet request = new HttpGet(URL_CURRENT_WEATHER + "?appid=" + appid + "&id=" + city + "&units=metric");
     CloseableHttpResponse response = client.execute(request);
     BufferedHttpEntity entity = new BufferedHttpEntity(response.getEntity());
 
     return EntityUtils.toString(entity, "UTF-8");
-  }
-
-  protected JaTooWeather parseJSON(final String string) {
-
-    JSONObject json = new JSONObject(string);
-
-    if (logger.isDebugEnabled()) {
-      logger.debug(json.toString(2));
-    }
-
-    JSONObject jsonWeather = json.getJSONArray("weather").getJSONObject(0);
-    JSONObject jsonMain = json.getJSONObject("main");
-    JSONObject jsonWind = json.getJSONObject("wind");
-    JSONObject jsonClouds = json.getJSONObject("clouds");
-    JSONObject jsonSys = json.getJSONObject("sys");
-
-    JaTooWeather weather = new JaTooWeather();
-
-    weather.city = json.getString("name");
-
-    weather.description = jsonWeather.getString("description");
-
-    weather.temperature = jsonMain.getDouble("temp");
-    weather.temperatureUnit = JaTooWeather.TEMPERATURE_UNIT.CELSIUS;
-
-    weather.humidity = jsonMain.getInt("humidity");
-    weather.humidityUnit = JaTooWeather.HUMIDITY_UNIT.PERCENT;
-
-    weather.pressure = jsonMain.getDouble("pressure");
-    weather.pressureUnit = JaTooWeather.PRESSURE_UNIT.HPA;
-
-    weather.wind = jsonWind.getDouble("speed");
-    weather.windUnit = JaTooWeather.WIND_UNIT.METER_PER_SEC;
-
-    weather.windDirection = jsonWind.getDouble("deg");
-    weather.windDirectionUnit = JaTooWeather.WIND_DIRECTION_UNIT.DEGREES_METEOROLOGICAL;
-
-    weather.clouds = jsonClouds.getInt("all");
-    weather.cloudsUnit = JaTooWeather.CLOUDS_UNIT.PERCENT;
-
-    weather.sunrise = jsonSys.getLong("sunrise") * 1000L;
-    weather.sunset = jsonSys.getLong("sunset") * 1000L;
-
-    return weather;
   }
 
 }
