@@ -28,13 +28,12 @@ import jatoo.weather.JaTooWeatherService;
 
 public class JaTooWeatherOpenWeatherMapTest {
 
-  private static final String APPID = "0b438dbe7fb5d24ce8ca273834fc988c";
   private static final String CITY = "683506";
 
   @Test
   public void test1() throws Throwable {
 
-    JaTooWeatherService service = new AbstractJaTooWeatherOpenWeatherMap(APPID) {
+    JaTooWeatherService service = new AbstractJaTooWeatherOpenWeatherMap() {
       @Override
       protected String getJSONResponse(String url) throws IOException {
         return IOUtils.toString(JaTooWeatherOpenWeatherMapTest.class.getResource("response1.json"));
@@ -59,7 +58,7 @@ public class JaTooWeatherOpenWeatherMapTest {
   @Test
   public void test2() throws Throwable {
 
-    JaTooWeatherService service = new AbstractJaTooWeatherOpenWeatherMap(APPID) {
+    JaTooWeatherService service = new AbstractJaTooWeatherOpenWeatherMap() {
       @Override
       protected String getJSONResponse(String url) throws IOException {
         return IOUtils.toString(JaTooWeatherOpenWeatherMapTest.class.getResource("response2.json"));
