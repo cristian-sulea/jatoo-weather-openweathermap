@@ -42,17 +42,17 @@ public class JaTooWeatherOpenWeatherMapTest {
 
     JaTooWeather weather = service.getWeather(CITY, false);
 
-    Assert.assertEquals("broken clouds", service.getDescription(weather));
-    Assert.assertEquals("Temperature: 14.41 °C", service.getTemperatureWithText(weather));
-    Assert.assertEquals("Humidity: 77 %", service.getHumidityWithText(weather));
-    Assert.assertEquals("Pressure: 1023.89 hPa", service.getPressureWithText(weather));
-    Assert.assertEquals("Wind: 2.42 meters/sec", service.getWindWithText(weather));
-    Assert.assertEquals("Wind Direction: 9.50104 degrees (meteorological)", service.getWindDirectionWithText(weather));
-    Assert.assertEquals("Clouds: 56 %", service.getCloudsWithText(weather));
-    Assert.assertEquals("Rain: -", service.getRainWithText(weather));
-    Assert.assertEquals("Snow: -", service.getSnowWithText(weather));
-    Assert.assertEquals("Sunrise: 07:21", service.getSunriseWithText(weather));
-    Assert.assertEquals("Sunset: 18:43", service.getSunsetWithText(weather));
+    Assert.assertEquals("broken clouds", weather.getDescriptionText());
+    Assert.assertEquals("Temperature: 14.41 °C", weather.getTemperatureTextFull());
+    Assert.assertEquals("Humidity: 77 %", weather.getHumidityTextFull());
+    Assert.assertEquals("Pressure: 1023.89 hPa", weather.getPressureTextFull());
+    Assert.assertEquals("Wind: 2.42 meters/sec", weather.getWindTextFull());
+    Assert.assertEquals("Wind Direction: 9.50104 degrees (meteorological)", weather.getWindDirectionTextFull());
+    Assert.assertEquals("Clouds: 56 %", weather.getCloudsTextFull());
+    Assert.assertEquals("Rain: -", weather.getRainTextFull());
+    Assert.assertEquals("Snow: -", weather.getSnowTextFull());
+    Assert.assertEquals("Sunrise: 07:21", weather.getSunriseTextFull());
+    Assert.assertEquals("Sunset: 18:43", weather.getSunsetTextFull());
   }
 
   @Test
@@ -67,17 +67,17 @@ public class JaTooWeatherOpenWeatherMapTest {
 
     JaTooWeather weather = service.getWeather(CITY, false);
 
-    Assert.assertEquals("light rain", service.getDescription(weather));
-    Assert.assertEquals("Temperature: 11.15 °C", service.getTemperatureWithText(weather));
-    Assert.assertEquals("Humidity: 91 %", service.getHumidityWithText(weather));
-    Assert.assertEquals("Pressure: 1026.84 hPa", service.getPressureWithText(weather));
-    Assert.assertEquals("Wind: 3.62 meters/sec", service.getWindWithText(weather));
-    Assert.assertEquals("Wind Direction: 78.5013 degrees (meteorological)", service.getWindDirectionWithText(weather));
-    Assert.assertEquals("Clouds: 92 %", service.getCloudsWithText(weather));
-    Assert.assertEquals("Rain: -", service.getRainWithText(weather));
-    Assert.assertEquals("Snow: -", service.getSnowWithText(weather));
-    Assert.assertEquals("Sunrise: 07:25", service.getSunriseWithText(weather));
-    Assert.assertEquals("Sunset: 18:38", service.getSunsetWithText(weather));
+    Assert.assertEquals("light rain", weather.getDescriptionText());
+    Assert.assertEquals("Temperature: 11.15 °C", weather.getTemperatureTextFull());
+    Assert.assertEquals("Humidity: 91 %", weather.getHumidityTextFull());
+    Assert.assertEquals("Pressure: 1026.84 hPa", weather.getPressureTextFull());
+    Assert.assertEquals("Wind: 3.62 meters/sec", weather.getWindTextFull());
+    Assert.assertEquals("Wind Direction: 78.5013 degrees (meteorological)", weather.getWindDirectionTextFull());
+    Assert.assertEquals("Clouds: 92 %", weather.getCloudsTextFull());
+    Assert.assertEquals("Rain: -", weather.getRainTextFull());
+    Assert.assertEquals("Snow: -", weather.getSnowTextFull());
+    Assert.assertEquals("Sunrise: 07:25", weather.getSunriseTextFull());
+    Assert.assertEquals("Sunset: 18:38", weather.getSunsetTextFull());
   }
 
 }

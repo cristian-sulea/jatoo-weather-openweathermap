@@ -70,32 +70,32 @@ public abstract class AbstractJaTooWeatherOpenWeatherMap extends JaTooWeatherSer
     JSONObject jsonClouds = json.getJSONObject("clouds");
     JSONObject jsonSys = json.getJSONObject("sys");
 
-    JaTooWeather weather = new JaTooWeather();
+    JaTooWeather weather = new JaTooWeather(this);
 
-    weather.city = json.getString("name");
+    weather.setCity(json.getString("name"));
 
-    weather.description = jsonWeather.getString("description");
+    weather.setDescription(jsonWeather.getString("description"));
 
-    weather.temperature = jsonMain.getDouble("temp");
-    weather.temperatureUnit = JaTooWeather.TEMPERATURE_UNIT.CELSIUS;
+    weather.setTemperature(jsonMain.getDouble("temp"));
+    weather.setTemperatureUnit(JaTooWeather.TEMPERATURE_UNIT.CELSIUS);
 
-    weather.humidity = jsonMain.getInt("humidity");
-    weather.humidityUnit = JaTooWeather.HUMIDITY_UNIT.PERCENT;
+    weather.setHumidity(jsonMain.getInt("humidity"));
+    weather.setHumidityUnit(JaTooWeather.HUMIDITY_UNIT.PERCENT);
 
-    weather.pressure = jsonMain.getDouble("pressure");
-    weather.pressureUnit = JaTooWeather.PRESSURE_UNIT.HPA;
+    weather.setPressure(jsonMain.getDouble("pressure"));
+    weather.setPressureUnit(JaTooWeather.PRESSURE_UNIT.HPA);
 
-    weather.wind = jsonWind.getDouble("speed");
-    weather.windUnit = JaTooWeather.WIND_UNIT.METER_PER_SEC;
+    weather.setWind(jsonWind.getDouble("speed"));
+    weather.setWindUnit(JaTooWeather.WIND_UNIT.METER_PER_SEC);
 
-    weather.windDirection = jsonWind.getDouble("deg");
-    weather.windDirectionUnit = JaTooWeather.WIND_DIRECTION_UNIT.DEGREES_METEOROLOGICAL;
+    weather.setWindDirection(jsonWind.getDouble("deg"));
+    weather.setWindDirectionUnit(JaTooWeather.WIND_DIRECTION_UNIT.DEGREES_METEOROLOGICAL);
 
-    weather.clouds = jsonClouds.getInt("all");
-    weather.cloudsUnit = JaTooWeather.CLOUDS_UNIT.PERCENT;
+    weather.setClouds(jsonClouds.getInt("all"));
+    weather.setCloudsUnit(JaTooWeather.CLOUDS_UNIT.PERCENT);
 
-    weather.sunrise = TimeUnit.SECONDS.toMillis(jsonSys.getLong("sunrise"));
-    weather.sunset = TimeUnit.SECONDS.toMillis(jsonSys.getLong("sunset"));
+    weather.setSunrise(TimeUnit.SECONDS.toMillis(jsonSys.getLong("sunrise")));
+    weather.setSunset(TimeUnit.SECONDS.toMillis(jsonSys.getLong("sunset")));
 
     return weather;
   }
